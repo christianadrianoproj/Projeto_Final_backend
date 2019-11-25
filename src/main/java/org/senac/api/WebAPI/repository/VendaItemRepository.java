@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 *
 * @author Christian
 */
-
 public interface VendaItemRepository extends JpaRepository<VendaItem, Integer>{
 
 }

@@ -30,10 +30,12 @@ public class Venda {
     
 	@NotNull
     private LocalDate dataVenda;
+	
+	@NotNull
+    private Boolean confirmada;	
     
 	@ManyToOne
 	@JoinColumn(name="id_cliente")
-	@NotNull
     private Cliente cliente;
 
     private Double desconto;
@@ -41,6 +43,7 @@ public class Venda {
     private Double valorPago;
 
     @OneToMany(mappedBy = "venda")
+    /*@Cascade({ org.hibernate.annotations.CascadeType.ALL })*/
     private List<VendaItem> itens;
 
 	public Integer getIdVenda() {
@@ -91,7 +94,16 @@ public class Venda {
 		this.itens = itens;
 	}
 	
-    public Double getValorTroco() {
+	
+    public Boolean getConfirmada() {
+		return confirmada;
+	}
+
+	public void setConfirmada(Boolean confirmada) {
+		this.confirmada = confirmada;
+	}
+
+	public Double getValorTroco() {
         if (getValorPago() > getTotalVendaLiquida()) {
             return getValorPago() - getTotalVendaLiquida();
         } else {

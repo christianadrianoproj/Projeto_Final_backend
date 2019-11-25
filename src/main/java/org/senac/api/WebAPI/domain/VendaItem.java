@@ -32,14 +32,13 @@ public class VendaItem {
     
 	@ManyToOne
 	@JoinColumn(name="id_produto")
-	@NotNull
-	@JsonIgnore    
+	@NotNull    
     private Produto produto;
 	
 	@ManyToOne
 	@JoinColumn(name="id_venda")
 	@NotNull
-	@JsonIgnore    
+	@JsonIgnore
     private Venda venda;
 
 	public Integer getIdVendaItem() {
