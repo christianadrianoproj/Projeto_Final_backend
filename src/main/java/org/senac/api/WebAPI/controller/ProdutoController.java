@@ -1,5 +1,6 @@
 package org.senac.api.WebAPI.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +8,7 @@ import javax.validation.Valid;
 
 import org.senac.api.WebAPI.domain.Produto;
 import org.senac.api.WebAPI.repository.ProdutoRepository;
+import org.senac.api.WebAPI.vo.ProdutoVendido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,8 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.bytebuddy.asm.Advice.Return;
-
 /**
 *
 * @author Christian
@@ -29,6 +29,7 @@ import net.bytebuddy.asm.Advice.Return;
 @RequestMapping("/produto")
 @CrossOrigin(origins="*")
 public class ProdutoController {
+
 	@Autowired
 	private ProdutoRepository repository;
 	
@@ -55,4 +56,14 @@ public class ProdutoController {
 	public void delete(@PathVariable("id") Integer id) {
 		repository.deleteById(id);
 	}	
+	
+	@GetMapping("/totaisVendidos")
+	public List<ProdutoVendido> findMarcaTotal() {
+		return repository.findTotalProdutoVendido();
+	}	
+	
+	@GetMapping("/totaisVendidos/{dataVenda}")
+	public List<ProdutoVendido> findTotalProdutoVendidoByDataVenda(@PathVariable("dataVenda") LocalDate dataVenda) {
+		return repository.findTotalProdutoVendidoByDataVenda(dataVenda);
+	}		
 }

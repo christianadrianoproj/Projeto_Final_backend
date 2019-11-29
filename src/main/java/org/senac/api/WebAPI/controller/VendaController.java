@@ -7,6 +7,7 @@ import org.senac.api.WebAPI.domain.VendaItem;
 import org.senac.api.WebAPI.repository.VendaItemRepository;
 import org.senac.api.WebAPI.domain.Venda;
 import org.senac.api.WebAPI.repository.VendaRepository;
+import org.senac.api.WebAPI.vo.TotalVenda;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -101,4 +102,10 @@ public class VendaController {
 		}
 		repository.deleteById(id);
 	}
+	
+	@GetMapping("/quantidadevendas")
+	public List<TotalVenda> findMarcaTotal() {
+		return repository.findVendasByData();
+	}
+		
 }
